@@ -9,12 +9,14 @@ namespace TurnBased.States {
         // when done, set next state
         // draw UI depending on the current players actions
 
-        public override void Init() {
+        public PlayerState() {
             availableEntities = new List<Entity>() {
                     new Entity("Rambo", new Vector2(50, 50)),
                     new Entity("Terminator", new Vector2(100, 100))
                 };
+        }
 
+        public override void Init() {
             foreach (Entity entity in availableEntities) {
                 entity.Init();
                 entityTurnOrder.Enqueue(entity);

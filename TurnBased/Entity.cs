@@ -33,12 +33,13 @@ namespace TurnBased {
             // eventQueue.Push("shoot", "targetCoords x,y");
         }
 
-        internal bool IsEnergyDepleted() {
-            return energy <= 0;
+        internal void Move(Vector2 vector2) {
+            energy -= 100;
+            Position = vector2;
         }
 
-        internal void Move(Vector2 vector2) {
-            Position = vector2;
+        internal bool IsEnergyDepleted() {
+            return energy <= 0;
         }
     }
 }

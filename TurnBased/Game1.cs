@@ -107,7 +107,7 @@ namespace TurnBased {
                 actions.Enqueue("weapon");
             }
             if (lastKeyBoardState.IsKeyDown(Keys.G) && currentKeyBoardState.IsKeyUp(Keys.G)) {
-                actions.Enqueue("move");
+                actions.Enqueue("changeCharacter");
             }
             if (lastMouseState.LeftButton == ButtonState.Pressed && currentMouseState.LeftButton == ButtonState.Released) {
                 actions.Enqueue("move;" + Mouse.GetState().X + "," + Mouse.GetState().Y);
