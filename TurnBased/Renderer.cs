@@ -11,13 +11,15 @@ namespace TurnBased {
         private Texture2D textureAI;
 
         private Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
+        private Dictionary<string, SpriteFont> fonts = new Dictionary<string, SpriteFont>();
 
-        public Renderer(Texture2D texturePlayer, Texture2D textureAI) {
+        public Renderer(Texture2D texturePlayer, Texture2D textureAI, SpriteFont font) {
             textures.Add("Rambo", texturePlayer);
             textures.Add("Terminator", texturePlayer);
             textures.Add("red", textureAI);
+            
+            fonts.Add("normal", font);
         }
-
 
         // character info for UI
         // - current weapon/spell
@@ -39,7 +41,7 @@ namespace TurnBased {
             var model = stateManager.GetModel();
             while (model.States.Count != 0) {
                 DrawState drawState = model.States.Pop();
-                drawState.Draw(spriteBatch, textures);
+                drawState.Draw(spriteBatch, textures, fonts);
             }
         }
     }

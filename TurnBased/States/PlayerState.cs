@@ -69,7 +69,8 @@ namespace TurnBased.States {
             foreach (var entity in availableEntities) {
                 entities.Add(new KeyValuePair<string, Vector2>(entity.Name, entity.Position));
             }
-            return new EntityDrawState(entities);
+            Entity selectedEntity = entityTurnOrder.Peek();
+            return new EntityDrawState(entities, selectedEntity.Name);
         }
     }
 }

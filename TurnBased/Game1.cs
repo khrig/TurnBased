@@ -27,6 +27,8 @@ namespace TurnBased {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             this.IsMouseVisible = true;
+            graphics.PreferredBackBufferHeight = 800;
+            graphics.PreferredBackBufferWidth = 800;
         }
 
         /// <summary>
@@ -53,7 +55,7 @@ namespace TurnBased {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            renderer = new Renderer(TextureManager.CreateTexture(GraphicsDevice, 20, 20, Color.Green), TextureManager.CreateTexture(GraphicsDevice, 20, 20, Color.Red));
+            renderer = new Renderer(TextureManager.CreateTexture(GraphicsDevice, 20, 20, Color.Green), TextureManager.CreateTexture(GraphicsDevice, 20, 20, Color.Red), Content.Load<SpriteFont>("monolight12"));
             // TODO: use this.Content to load your game content here
         }
 
@@ -74,7 +76,7 @@ namespace TurnBased {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            DetectUIInput();
+            UIInput();
             stateManager.Act(actions);
             stateManager.Update();
 
@@ -95,7 +97,7 @@ namespace TurnBased {
 
         private KeyboardState lastKeyBoardState;
         private MouseState lastMouseState;
-        private void DetectUIInput() {
+        private void UIInput() {
             KeyboardState currentKeyBoardState = Keyboard.GetState();
             MouseState currentMouseState = Mouse.GetState();
             if (lastKeyBoardState.IsKeyDown(Keys.G) && currentKeyBoardState.IsKeyUp(Keys.G)) {

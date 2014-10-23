@@ -25,7 +25,7 @@ namespace TurnBased.States {
         }
 
         public override DrawState GetDrawState() {
-            return new EntityDrawState(new List<KeyValuePair<string,Microsoft.Xna.Framework.Vector2>>());
+            return new EntityDrawState(new List<KeyValuePair<string,Microsoft.Xna.Framework.Vector2>>(), string.Empty);
         }
     }
 }

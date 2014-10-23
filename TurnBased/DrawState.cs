@@ -6,6 +6,6 @@ using System.Text;
 
 namespace TurnBased {
     public abstract class DrawState {
-        public abstract void Draw(SpriteBatch spriteBatch, Dictionary<string, Texture2D> textures);
+        public abstract void Draw(SpriteBatch spriteBatch, Dictionary<string, Texture2D> textures, Dictionary<string, SpriteFont> fonts);
     }
 }
