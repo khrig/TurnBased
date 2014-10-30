@@ -103,7 +103,7 @@ namespace TurnBased {
         private void UIInput() {
             KeyboardState currentKeyBoardState = Keyboard.GetState();
             MouseState currentMouseState = Mouse.GetState();
-            if (lastKeyBoardState.IsKeyDown(Keys.G) && currentKeyBoardState.IsKeyUp(Keys.G)) {
+            if (lastKeyBoardState.IsKeyDown(Keys.S) && currentKeyBoardState.IsKeyUp(Keys.S)) {
                 actions.Enqueue("shoot");
             }
             if (lastKeyBoardState.IsKeyDown(Keys.Space) && currentKeyBoardState.IsKeyUp(Keys.Space)) {
