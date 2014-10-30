@@ -27,8 +27,8 @@ namespace TurnBased {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             this.IsMouseVisible = true;
-            graphics.PreferredBackBufferHeight = 800;
-            graphics.PreferredBackBufferWidth = 800;
+            graphics.PreferredBackBufferWidth = 640;
+            graphics.PreferredBackBufferHeight = 640;
         }
 
         /// <summary>
@@ -55,7 +55,10 @@ namespace TurnBased {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            renderer = new Renderer(TextureManager.CreateTexture(GraphicsDevice, 20, 20, Color.Green), TextureManager.CreateTexture(GraphicsDevice, 20, 20, Color.Red), Content.Load<SpriteFont>("monolight12"));
+            renderer = new Renderer(TextureManager.CreateTexture(GraphicsDevice, 20, 20, Color.Green), 
+                TextureManager.CreateTexture(GraphicsDevice, 20, 20, Color.Red), 
+                Content.Load<Texture2D>("spaceship32x32"),
+                Content.Load<SpriteFont>("monolight12"));
             // TODO: use this.Content to load your game content here
         }
 

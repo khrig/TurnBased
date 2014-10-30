@@ -24,3 +24,4 @@ C:\Code\TurnBased\TurnBased\obj\x86\Debug\TurnBased.csprojResolveAssemblyReferen
 C:\Code\TurnBased\TurnBased\obj\x86\Debug\TurnBased.exe
 C:\Code\TurnBased\TurnBased\obj\x86\Debug\TurnBased.pdb
 C:\Code\TurnBased\TurnBased\bin\Windows\Debug\Content\monolight12.xnb
+C:\Code\TurnBased\TurnBased\bin\Windows\Debug\Content\spaceship32x32.png

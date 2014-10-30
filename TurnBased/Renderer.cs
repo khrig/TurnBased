@@ -13,10 +13,11 @@ namespace TurnBased {
         private Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
         private Dictionary<string, SpriteFont> fonts = new Dictionary<string, SpriteFont>();
 
-        public Renderer(Texture2D texturePlayer, Texture2D textureAI, SpriteFont font) {
+        public Renderer(Texture2D texturePlayer, Texture2D textureAI, Texture2D background, SpriteFont font) {
             textures.Add("Rambo", texturePlayer);
             textures.Add("Terminator", texturePlayer);
             textures.Add("red", textureAI);
+            textures.Add("bkg", background);
             
             fonts.Add("normal", font);
         }
@@ -39,6 +40,7 @@ namespace TurnBased {
 
         public void DrawStateModel(SpriteBatch spriteBatch, StateManager stateManager) {
             var model = stateManager.GetModel();
+            model.DrawBackground(spriteBatch, textures, fonts);
             while (model.States.Count != 0) {
                 DrawState drawState = model.States.Pop();
                 drawState.Draw(spriteBatch, textures, fonts);

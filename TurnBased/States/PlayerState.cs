@@ -52,7 +52,13 @@ namespace TurnBased.States {
 
         private Vector2 GetCharacterMove(string action) {
             string[] arr = action.Split(';')[1].Split(',');
-            return new Vector2(int.Parse(arr[0]), int.Parse(arr[1]));
+            return ConvertToGridPosition(int.Parse(arr[0]), int.Parse(arr[1]));
+        }
+
+        private Vector2 ConvertToGridPosition(int x, int y) {
+            int bkgTileSizeX = 64, bkgTileSizeY = 64;
+            int middleXMinusHalfSpriteSize = 22, middleYMinusHalfSpriteSize = 22;
+            return new Vector2(x - (x % bkgTileSizeX) + middleXMinusHalfSpriteSize, y - (y % bkgTileSizeY) + middleYMinusHalfSpriteSize);
         }
 
         private void PutCharacterFirstInQueue() {

@@ -16,14 +16,16 @@ namespace TurnBased {
         }
 
         public override void Draw(SpriteBatch spriteBatch, Dictionary<string, Texture2D> textures, Dictionary<string, SpriteFont> fonts) {
-            int startx = 20;
+            int startx = 40;
             for (int i = 0; i < entities.Count; i++) {
                 spriteBatch.Draw(textures[entities[i].Key], entities[i].Value, Color.Green);
                 // Draw ui for showing selectable characters
                 // Should probably be done by UI class or something
-                spriteBatch.DrawString(fonts["normal"], entities[i].Key, new Vector2(startx + i*100, 750),
+                // Needs reference to size of window
+                spriteBatch.DrawString(fonts["normal"], entities[i].Key, new Vector2(startx + i*100, 570),
                     entities[i].Key == selectedEntity ? Color.Yellow : Color.Black); 
             }
         }
+
     }
 }

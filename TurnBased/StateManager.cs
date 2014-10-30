@@ -42,11 +42,26 @@ namespace TurnBased {
         }
 
         internal StatesModel GetModel() {
-            StatesModel statesModel = new StatesModel();
+            StatesModel statesModel = new StatesModel(new Grid(GetBackground()));
             foreach (State state in states) {
                 statesModel.States.Push(state.GetDrawState());
             }
             return statesModel;
+        }
+
+        private string[,] GetBackground() {
+            return new string[,] {
+                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
+                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
+                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
+                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
+                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
+                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
+                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
+                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" },
+                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" },
+                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
+            };
         }
     }
 }
