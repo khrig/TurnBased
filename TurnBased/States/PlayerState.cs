@@ -55,6 +55,7 @@ namespace TurnBased.States {
             return ConvertToGridPosition(int.Parse(arr[0]), int.Parse(arr[1]));
         }
 
+		// Should be done in the renderer!
         private Vector2 ConvertToGridPosition(int x, int y) {
             int bkgTileSizeX = 64, bkgTileSizeY = 64;
             int middleXMinusHalfSpriteSize = 22, middleYMinusHalfSpriteSize = 22;
