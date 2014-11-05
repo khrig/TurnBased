@@ -40,15 +40,15 @@ namespace TurnBased.States {
                 current.Shoot("x,y");
             if (action == "skip" || current.IsEnergyDepleted()) {
                 entityTurnOrder.Dequeue();
-				SetCurrentEntity();
 			}
             if (entityTurnOrder.Count == 0) {
                 // We are done with this turn
                 // Set next state to computer state
-				model.CurrentEntity = null;
                 this.StateManager.Pop();
                 this.StateManager.Push("computer");
             }
+			
+			SetCurrentEntity();
         }
 
         private Vector2 GetCharacterMove(string action) {
@@ -61,12 +61,13 @@ namespace TurnBased.States {
             // Should find the character and then put it first in queue
             Entity e = entityTurnOrder.Dequeue();
             entityTurnOrder.Enqueue(e);
-			SetCurrentEntity();
         }
 		
 		private void SetCurrentEntity() {
 			if(entityTurnOrder.Count > 0)
 				model.CurrentEntity = entityTurnOrder.Peek();
+			else 
+				model.CurrentEntity = null;
 		}
 
         public override void Update(float deltaTime) {
