@@ -13,7 +13,7 @@ namespace TurnBased {
         private Queue<string> actions = new Queue<string>();
 		
 		public WorldController() {
-			model = new WorldModel(new Grid(GetBackground()), new List<Entity>(), null);
+			model = new WorldModel(new Grid(GetBackground()));
 		
 			stateManager = new StateManager();
 			stateManager.Add("player", new PlayerState(model));
