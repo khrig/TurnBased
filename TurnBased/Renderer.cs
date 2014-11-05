@@ -13,13 +13,13 @@ namespace TurnBased {
         private Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
         private Dictionary<string, SpriteFont> fonts = new Dictionary<string, SpriteFont>();
 
-        public Renderer(Texture2D texturePlayer, Texture2D textureAI, Texture2D background, SpriteFont font) {
-            textures.Add("Rambo", texturePlayer);
-            textures.Add("Terminator", texturePlayer);
-            textures.Add("red", textureAI);
-            textures.Add("bkg", background);
-            
-            fonts.Add("normal", font);
+        public Renderer(ContentManager content) {
+            textures.Add("Rambo", TextureManager.CreateTexture(GraphicsDevice, 20, 20, Color.Green));
+            textures.Add("Terminator", TextureManager.CreateTexture(GraphicsDevice, 20, 20, Color.Green));
+            textures.Add("red", TextureManager.CreateTexture(GraphicsDevice, 20, 20, Color.Red));
+            textures.Add("bkg", content.Load<Texture2D>("spaceship32x32"));
+			
+            fonts.Add("normal", content.Load<SpriteFont>("monolight12"));
         }
 
         // character info for UI

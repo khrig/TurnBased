@@ -54,12 +54,7 @@ namespace TurnBased {
         protected override void LoadContent() {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            renderer = new Renderer(TextureManager.CreateTexture(GraphicsDevice, 20, 20, Color.Green), 
-                TextureManager.CreateTexture(GraphicsDevice, 20, 20, Color.Red), 
-                Content.Load<Texture2D>("spaceship32x32"),
-                Content.Load<SpriteFont>("monolight12"));
-            // TODO: use this.Content to load your game content here
+            renderer = new Renderer(ContentManager);
         }
 
         /// <summary>
