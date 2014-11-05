@@ -38,8 +38,7 @@ namespace TurnBased {
         // - menu
         // - inventory?
 
-        public void DrawStateModel(SpriteBatch spriteBatch, StateManager stateManager) {
-            var model = stateManager.GetModel();
+        public void DrawStateModel(SpriteBatch spriteBatch, WorldModel model) {
             model.DrawBackground(spriteBatch, textures, fonts);
             while (model.States.Count != 0) {
                 DrawState drawState = model.States.Pop();

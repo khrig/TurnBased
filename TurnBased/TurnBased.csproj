@@ -45,7 +45,7 @@
     <Compile Include="Renderer.cs" />
     <Compile Include="Slask.cs" />
     <Compile Include="StateManager.cs" />
-    <Compile Include="StatesModel.cs" />
+    <Compile Include="WorldModel.cs" />
     <Compile Include="States\AIState.cs" />
     <Compile Include="States\PlayerState.cs" />
     <Compile Include="States\State.cs" />

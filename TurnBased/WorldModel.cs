@@ -6,12 +6,12 @@ using System.Linq;
 using System.Text;
 
 namespace TurnBased {
-    public class StatesModel {
+    public class WorldModel {
         public Stack<DrawState> States { get; set; }
         private readonly Grid background;
         private int tileSizeX = 64, tileSizeY = 64;
 
-        public StatesModel(Grid background) {
+        public WorldModel(Grid background) {
             States = new Stack<DrawState>();
             this.background = background;
         }

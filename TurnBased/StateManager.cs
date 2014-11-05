@@ -41,12 +41,12 @@ namespace TurnBased {
             states.Peek().Update();
         }
 
-        internal StatesModel GetModel() {
-            StatesModel statesModel = new StatesModel(new Grid(GetBackground()));
+        internal WorldModel GetModel() {
+            WorldModel worldModel = new WorldModel(new Grid(GetBackground()));
             foreach (State state in states) {
-                statesModel.States.Push(state.GetDrawState());
+                worldModel.States.Push(state.GetDrawState());
             }
-            return statesModel;
+            return worldModel;
         }
 
         private string[,] GetBackground() {
