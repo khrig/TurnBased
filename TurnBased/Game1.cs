@@ -71,8 +71,7 @@ namespace TurnBased {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            UIInput();
-            worldController.Act(actions);
+            HandleInput(); // Inputmanager -> with reference to worldcontroller or something
             worldController.Update(gameTime);
             if (worldController.End()) {
                 Exit();
@@ -94,23 +93,22 @@ namespace TurnBased {
         }
 
 		// Move to a class
-        private Queue<string> actions = new Queue<string>();
         private KeyboardState lastKeyBoardState;
         private MouseState lastMouseState;
-        private void UIInput() {
+        private void HandleInput() {
             KeyboardState currentKeyBoardState = Keyboard.GetState();
             MouseState currentMouseState = Mouse.GetState();
             if (lastKeyBoardState.IsKeyDown(Keys.S) && currentKeyBoardState.IsKeyUp(Keys.S)) {
-                actions.Enqueue("shoot");
+                worldController.AddAction("shoot");
             }
             if (lastKeyBoardState.IsKeyDown(Keys.Space) && currentKeyBoardState.IsKeyUp(Keys.Space)) {
-                actions.Enqueue("weapon");
+                worldController.AddAction("weapon");
             }
             if (lastKeyBoardState.IsKeyDown(Keys.G) && currentKeyBoardState.IsKeyUp(Keys.G)) {
-                actions.Enqueue("changeCharacter");
+                worldController.AddAction("changeCharacter");
             }
             if (lastMouseState.LeftButton == ButtonState.Pressed && currentMouseState.LeftButton == ButtonState.Released) {
-                actions.Enqueue("move;" + Mouse.GetState().X + "," + Mouse.GetState().Y);
+                worldController.AddAction("move;" + Mouse.GetState().X + "," + Mouse.GetState().Y);
             }
             lastKeyBoardState = currentKeyBoardState;
             lastMouseState = currentMouseState;

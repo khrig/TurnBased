@@ -5,7 +5,9 @@ using System.Text;
 
 namespace TurnBased.States {
     public class AIState : State {
-        // draw disabled UI // Loader on UI
+		public AIState(WorldModel model) : base(model) {
+		}
+	
         public override void Act(string action) {
 
         }
@@ -20,14 +22,6 @@ namespace TurnBased.States {
 
             this.StateManager.Pop();
             this.StateManager.Push("player");
-        }
-		
-		public override List<Entity> GetEntities() {
-            return new List<Entity>();
-        }
-		
-		public override string GetCurrentEntity() {
-            return string.Empty;
         }
     }
 }

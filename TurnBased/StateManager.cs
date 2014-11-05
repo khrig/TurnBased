@@ -10,17 +10,38 @@ namespace TurnBased {
 	public class WorldController {
 		private StateManager stateManager;
 		private WorldModel model;
+        private Queue<string> actions = new Queue<string>();
 		
 		public WorldController() {
-			stateManager = new StateManager();
-			stateManager.Add("player", new PlayerState());
-            stateManager.Add("computer", new AIState());
-            stateManager.Push("player");
-			
 			model = new WorldModel(new Grid(GetBackground()), new List<Entity>(), null);
+		
+			stateManager = new StateManager();
+			stateManager.Add("player", new PlayerState(model));
+            stateManager.Add("computer", new AIState(model));
+            stateManager.Push("player");
 		}
 		
-		public void Act(Queue<string> actions) {
+		public void Update(GameTime gameTime) {
+			HandleActions();
+		
+			float deltaTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            stateManager.Update(deltaTime);
+		}
+		
+		public void AddAction(string action) {
+			actions.Enqueue(action);
+		}
+		
+		public bool End() {
+			return stateManager.IsEmpty();
+		}
+		
+		public WorldModel GetWorldModel() {
+			throw new NotImplementedException("world model needs to be updated in the states or it needs to read the states");
+			return model;
+		}
+		
+		private void HandleActions() {
 			while (actions.Count != 0) {
                 string action = actions.Dequeue();
                 if (action == "pause")
@@ -31,20 +52,6 @@ namespace TurnBased {
 					stateManager.Act(actions);
 				}
 			}
-		}
-		
-		public void Update(GameTime gameTime) {
-			float deltaTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            stateManager.Update(deltaTime);
-		}
-		
-		public bool End() {
-			return stateManager.IsEmpty();
-		}
-		
-		public WorldModel GetWorldModel() {
-			throw new NotImplementedException("world model needs to be updated in the states or it needs to read the states");
-			return model;
 		}
 		
 		private string[,] GetBackground() {
