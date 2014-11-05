@@ -40,7 +40,7 @@ namespace TurnBased.States {
                 current.Shoot("x,y");
             if (action == "skip" || current.IsEnergyDepleted()) {
                 entityTurnOrder.Dequeue();
-				model.CurrentEntity = entityTurnOrder.Peek();
+				SetCurrentEntity();
 			}
             if (entityTurnOrder.Count == 0) {
                 // We are done with this turn
@@ -60,9 +60,14 @@ namespace TurnBased.States {
             // Change entity turn order
             // Should find the character and then put it first in queue
             Entity e = entityTurnOrder.Dequeue();
-			model.CurrentEntity = e;
             entityTurnOrder.Enqueue(e);
+			SetCurrentEntity();
         }
+		
+		private void SetCurrentEntity() {
+			if(entityTurnOrder.Count > 0)
+				model.CurrentEntity = entityTurnOrder.Peek();
+		}
 
         public override void Update(float deltaTime) {
             // unkown

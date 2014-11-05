@@ -37,7 +37,6 @@ namespace TurnBased {
 		}
 		
 		public WorldModel GetWorldModel() {
-			throw new NotImplementedException("world model needs to be updated in the states or it needs to read the states");
 			return model;
 		}
 		
