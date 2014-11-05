@@ -68,7 +68,7 @@ namespace TurnBased.States {
             entityTurnOrder.Enqueue(e);
         }
 
-        public override void Update() {
+        public override void Update(float deltaTime) {
             // unkown
         }
 

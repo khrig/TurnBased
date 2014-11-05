@@ -37,14 +37,14 @@ namespace TurnBased {
             states.Pop();
         }
 
-        internal void Update() {
-            states.Peek().Update();
+        internal void Update(float deltaTime) {
+            states.Peek().Update(deltaTime);
         }
 
         internal WorldModel GetModel() {
             WorldModel worldModel = new WorldModel(new Grid(GetBackground()));
             foreach (State state in states) {
-                worldModel.States.Push(state.GetDrawState());
+                worldModel.States.Add(state.GetDrawState());
             }
             return worldModel;
         }

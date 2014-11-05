@@ -20,8 +20,6 @@ namespace TurnBased {
         StateManager stateManager = new StateManager();
         Renderer renderer;
 
-        private Queue<string> actions = new Queue<string>();
-
         public Game1()
             : base() {
             graphics = new GraphicsDeviceManager(this);
@@ -76,7 +74,13 @@ namespace TurnBased {
 
             UIInput();
             stateManager.Act(actions);
-            stateManager.Update();
+            
+			float deltaTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            stateManager.Update(deltaTime);
+
+            if (stateManager.IsEmpty()) {
+                Exit();
+            }
 
             base.Update(gameTime);
         }
@@ -86,13 +90,14 @@ namespace TurnBased {
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime) {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
-            renderer.DrawStateModel(spriteBatch, stateManager);
+            renderer.Draw(spriteBatch, stateManager.GetModel());
             spriteBatch.End();
             base.Draw(gameTime);
         }
 
+        private Queue<string> actions = new Queue<string>();
         private KeyboardState lastKeyBoardState;
         private MouseState lastMouseState;
         private void UIInput() {

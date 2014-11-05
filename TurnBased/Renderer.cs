@@ -38,12 +38,19 @@ namespace TurnBased {
         // - menu
         // - inventory?
 
-        public void DrawStateModel(SpriteBatch spriteBatch, WorldModel model) {
-            model.DrawBackground(spriteBatch, textures, fonts);
-            while (model.States.Count != 0) {
-                DrawState drawState = model.States.Pop();
+        public void Draw(SpriteBatch spriteBatch, WorldModel model) {
+            DrawWorld(spriteBatch, model);
+			DrawUI(spriteBatch, model);
+        }
+		
+		private void DrawWorld(SpriteBatch spriteBatch, WorldModel model) {
+			model.DrawBackground(spriteBatch, textures, fonts);
+            foreach(DrawState drawState in states) {
                 drawState.Draw(spriteBatch, textures, fonts);
             }
-        }
+		}
+		
+		private void DrawUI(SpriteBatch spriteBatch, WorldModel model) {
+		}
     }
 }

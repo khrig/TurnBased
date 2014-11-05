@@ -16,7 +16,7 @@ namespace TurnBased.States {
             // Set order of movement
         }
 
-        public override void Update() {
+        public override void Update(float deltaTime) {
             Console.WriteLine("updating computer entities");
             // Move and shoot and shit
 

@@ -7,12 +7,12 @@ using System.Text;
 
 namespace TurnBased {
     public class WorldModel {
-        public Stack<DrawState> States { get; set; }
+        public List<DrawState> States { get; set; }
         private readonly Grid background;
         private int tileSizeX = 64, tileSizeY = 64;
 
         public WorldModel(Grid background) {
-            States = new Stack<DrawState>();
+            States = new List<DrawState>();
             this.background = background;
         }
 
