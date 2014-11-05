@@ -11,10 +11,14 @@ namespace TurnBased {
 		public List<Entity> Entities { get; set; }
 		public Entity CurrentEntity { get; set; }
 
-        public WorldModel(Grid background, List<Entity> entities, Entity currentEntity) {
+        public WorldModel(Grid background) {
             Background = background;
-			Entities = entities;
-			CurrentEntity = currentEntity;
+			Entities = List<Entity>();
+			CurrentEntity = null;
         }
+		
+		public bool Valid(string action) {
+			return true;
+		}
     }
 }

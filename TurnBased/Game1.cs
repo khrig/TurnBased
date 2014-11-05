@@ -17,8 +17,8 @@ namespace TurnBased {
     public class Game1 : Game {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        StateManager stateManager = new StateManager();
         Renderer renderer;
+		WorldController worldController;
 		private int windowWidth = 640;
 		private int windowHeight = 640;
 		
@@ -39,10 +39,7 @@ namespace TurnBased {
         /// </summary>
         protected override void Initialize() {
             // TODO: Add your initialization logic here
-            stateManager.Add("player", new PlayerState());
-            stateManager.Add("computer", new AIState());
-
-            stateManager.Push("player");
+            worldController = new WorldController();
 
             base.Initialize();
         }
@@ -75,12 +72,9 @@ namespace TurnBased {
                 Exit();
 
             UIInput();
-            stateManager.Act(actions);
-            
-			float deltaTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-            stateManager.Update(deltaTime);
-
-            if (stateManager.IsEmpty()) {
+            worldController.Act(actions);
+            worldController.Update(gameTime);
+            if (worldController.End()) {
                 Exit();
             }
 
@@ -94,7 +88,7 @@ namespace TurnBased {
         protected override void Draw(GameTime gameTime) {
             GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
-            renderer.Draw(spriteBatch, stateManager.GetModel());
+            renderer.Draw(spriteBatch, worldController.GetModel());
             spriteBatch.End();
             base.Draw(gameTime);
         }

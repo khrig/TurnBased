@@ -56,11 +56,6 @@ namespace TurnBased {
 				DrawTile(spriteBatch, ConvertToGridCenterPosition(entity.Position.X, entity.Position.Y), textures[entity.Name]);
 			}
 		}
-
-        private Vector2 ConvertToGridCenterPosition(int x, int y, Texture2D texture) {
-            int middleXMinusHalfSpriteWidth = tileCenter - (texture.White/2), middleYMinusHalfSpriteHeight = tileCenter - (texture.Height/2);
-            return new Vector2(x - (x % tileSizeX) + middleXMinusHalfSpriteWidth, y - (y % tileSizeY) + middleYMinusHalfSpriteHeight);
-        }
 		
 		private void DrawUI(SpriteBatch spriteBatch, WorldModel model) {
 			int startx = 40;
@@ -70,6 +65,11 @@ namespace TurnBased {
                 spriteBatch.DrawString(fonts["normal"], model.Entities[i].Name, new Vector2(startx + i*100, windowHeight - 70), color); 
             }
 		}
+
+        private Vector2 ConvertToGridCenterPosition(int x, int y, Texture2D texture) {
+            int middleXMinusHalfSpriteWidth = tileCenter - (texture.White/2), middleYMinusHalfSpriteHeight = tileCenter - (texture.Height/2);
+            return new Vector2(x - (x % tileSizeX) + middleXMinusHalfSpriteWidth, y - (y % tileSizeY) + middleYMinusHalfSpriteHeight);
+        }
 		
         private void DrawTile(SpriteBatch spriteBatch, Vector2 position, Texture2D sprite) {
             spriteBatch.Draw(sprite, position, Color.White);

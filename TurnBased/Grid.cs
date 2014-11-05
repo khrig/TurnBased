@@ -7,9 +7,6 @@ using System.Text;
 
 namespace TurnBased {
     public class Grid {
-        public const int EMPTY_TILE = 0;
-        public const int WALL_TILE = 1;
-
         private readonly string[,] grid;
         private readonly Random random = new Random();
 
