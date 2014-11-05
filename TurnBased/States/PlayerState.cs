@@ -27,26 +27,26 @@ namespace TurnBased.States {
         public override void Act(string action) {
             Console.WriteLine("Acting");
             if (action == "changeCharacter") {
-                PutCharacterFirstInQueue();
-                return;
+                PutNextCharacterFirstInQueue();                
             }
-
-            Entity current = entityTurnOrder.Peek();
-            if (action.StartsWith("move"))
-                current.Move(GetCharacterMove(action));
-            if (action == "weapon")
-                current.SetWeapon(1);
-            if (action == "shoot")
-                current.Shoot("x,y");
-            if (action == "skip" || current.IsEnergyDepleted()) {
-                entityTurnOrder.Dequeue();
+			else {
+				Entity current = entityTurnOrder.Peek();
+				if (action.StartsWith("move"))
+					current.Move(GetCharacterMove(action));
+				if (action == "weapon")
+					current.SetWeapon(1);
+				if (action == "shoot")
+					current.Shoot("x,y");
+				if (action == "skip" || current.IsEnergyDepleted()) {
+					entityTurnOrder.Dequeue();
+				}
+				if (entityTurnOrder.Count == 0) {
+					// We are done with this turn
+					// Set next state to computer state
+					this.StateManager.Pop();
+					this.StateManager.Push("computer");
+				}
 			}
-            if (entityTurnOrder.Count == 0) {
-                // We are done with this turn
-                // Set next state to computer state
-                this.StateManager.Pop();
-                this.StateManager.Push("computer");
-            }
 			
 			SetCurrentEntity();
         }
@@ -56,7 +56,7 @@ namespace TurnBased.States {
             return Vector2(int.Parse(arr[0]), int.Parse(arr[1]));
         }
 
-        private void PutCharacterFirstInQueue() {
+        private void PutNextCharacterFirstInQueue() {
             // Change entity turn order
             // Should find the character and then put it first in queue
             Entity e = entityTurnOrder.Dequeue();
