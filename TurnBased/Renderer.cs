@@ -8,6 +8,7 @@ using System.Text;
 namespace TurnBased {
     public class Renderer {
         private int tileSizeX = 64, tileSizeY = 64;
+		private int tileCenter = 32; 
 		private int windowWidth, windowHeight;
 
         private Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
@@ -48,14 +49,19 @@ namespace TurnBased {
 		
 		private void DrawWorld(SpriteBatch spriteBatch, WorldModel model) {
 			model.Background.ForeachTile((x, y, sprite) => {
-                DrawTile(spriteBatch, new Vector2(x * (int)tileSizeX, y * (int)tileSizeY), textures[sprite], 2);
+                DrawTile(spriteBatch, new Vector2(x * tileSizeX, y * tileSizeY), textures[sprite], 2);
             });
 			
 			foreach(Entity entity in model.Entities) {
-				DrawTile(spriteBatch, entity.Position, textures[entity.Name]);
+				DrawTile(spriteBatch, ConvertToGridCenterPosition(entity.Position.X, entity.Position.Y), textures[entity.Name]);
 			}
 		}
 
+        private Vector2 ConvertToGridCenterPosition(int x, int y, Texture2D texture) {
+            int middleXMinusHalfSpriteWidth = tileCenter - (texture.White/2), middleYMinusHalfSpriteHeight = tileCenter - (texture.Height/2);
+            return new Vector2(x - (x % tileSizeX) + middleXMinusHalfSpriteWidth, y - (y % tileSizeY) + middleYMinusHalfSpriteHeight);
+        }
+		
 		private void DrawUI(SpriteBatch spriteBatch, WorldModel model) {
 			int startx = 40;
             for (int i = 0; i < entities.Count; i++) {
