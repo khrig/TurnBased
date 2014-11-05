@@ -77,9 +77,10 @@ namespace TurnBased.States {
             return availableEntities;
         }
 		
-		public override string GetCurrentEntity() {
-            Entity selectedEntity = entityTurnOrder.Peek();
-            return selectedEntity.Name;
+		public override Entity GetCurrentEntity() {
+			if(entityTurnOrder.Count > 0)
+				return entityTurnOrder.Peek();
+			return null;
         }
     }
 }

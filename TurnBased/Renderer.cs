@@ -60,9 +60,8 @@ namespace TurnBased {
 			int startx = 40;
             for (int i = 0; i < entities.Count; i++) {
                 // Draw ui for showing selectable characters
-                // Needs reference to size of window
-                spriteBatch.DrawString(fonts["normal"], model.Entities[i].Name, new Vector2(startx + i*100, windowHeight - 70),
-                    model.Entities[i].Name == selectedEntity ? Color.Yellow : Color.White); 
+				var color = model.CurrentEntity.Name != null && model.Entities[i].Name == model.CurrentEntity.Name ? Color.Yellow : Color.White;
+                spriteBatch.DrawString(fonts["normal"], model.Entities[i].Name, new Vector2(startx + i*100, windowHeight - 70), color); 
             }
 		}
 		

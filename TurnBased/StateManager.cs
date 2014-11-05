@@ -43,12 +43,13 @@ namespace TurnBased {
 
 		// Keep a fixed model and only do changes that has happened to that model
         internal WorldModel GetModel() {
-			string currentEntity = string.Empty;
+			Entity currentEntity = null;
 			List<Entity> entities = new List<Entity>();
 			foreach (State state in states) {
 				entities.AddRange(state.GetEntities());
-				if(state.GetCurrentEntity() != string.Empty)
-					currentEntity = state.GetCurrentEntity();
+				Entity cEnt = state.GetCurrentEntity();
+				if(cEnt != null)
+					currentEntity = cEnt;
 			}
 			
             WorldModel worldModel = new WorldModel(new Grid(GetBackground()), entities, currentEntity);

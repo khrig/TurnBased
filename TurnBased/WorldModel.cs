@@ -9,10 +9,12 @@ namespace TurnBased {
     public class WorldModel {
         public Grid Background { get; set; }
 		public List<Entity> Entities { get; set; }
+		public Entity CurrentEntity { get; set; }
 
-        public WorldModel(Grid background, List<Entity> entities) {
+        public WorldModel(Grid background, List<Entity> entities, Entity currentEntity) {
             Background = background;
 			Entities = entities;
+			CurrentEntity = currentEntity;
         }
     }
 }
