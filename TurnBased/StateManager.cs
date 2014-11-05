@@ -41,11 +41,17 @@ namespace TurnBased {
             states.Peek().Update(deltaTime);
         }
 
+		// Keep a fixed model and only do changes that has happened to that model
         internal WorldModel GetModel() {
-            WorldModel worldModel = new WorldModel(new Grid(GetBackground()));
-            foreach (State state in states) {
-                worldModel.States.Add(state.GetDrawState());
-            }
+			string currentEntity = string.Empty;
+			List<Entity> entities = new List<Entity>();
+			foreach (State state in states) {
+				entities.AddRange(state.GetEntities());
+				if(state.GetCurrentEntity() != string.Empty)
+					currentEntity = state.GetCurrentEntity();
+			}
+			
+            WorldModel worldModel = new WorldModel(new Grid(GetBackground()), entities, currentEntity);
             return worldModel;
         }
 

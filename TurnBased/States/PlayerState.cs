@@ -72,13 +72,13 @@ namespace TurnBased.States {
             // unkown
         }
 
-        public override DrawState GetDrawState() {
-            List<KeyValuePair<string, Vector2>> entities = new List<KeyValuePair<string, Vector2>>();
-            foreach (var entity in availableEntities) {
-                entities.Add(new KeyValuePair<string, Vector2>(entity.Name, entity.Position));
-            }
+        public override List<Entity> GetEntities() {
+            return availableEntities;
+        }
+		
+		public override string GetCurrentEntity() {
             Entity selectedEntity = entityTurnOrder.Peek();
-            return new EntityDrawState(entities, selectedEntity.Name);
+            return selectedEntity.Name;
         }
     }
 }

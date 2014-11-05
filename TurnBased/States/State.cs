@@ -9,6 +9,7 @@ namespace TurnBased.States {
         public abstract void Act(string action);
         public abstract void Update(float deltaTime);
         public StateManager StateManager { get; set; }
-        public abstract DrawState GetDrawState();
+        public abstract List<Entity> GetEntities();
+		public abstract string GetCurrentEntity();
     }
 }

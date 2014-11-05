@@ -19,14 +19,16 @@ namespace TurnBased {
         SpriteBatch spriteBatch;
         StateManager stateManager = new StateManager();
         Renderer renderer;
-
+		private int windowWidth = 640;
+		private int windowHeight = 640;
+		
         public Game1()
             : base() {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             this.IsMouseVisible = true;
-            graphics.PreferredBackBufferWidth = 640;
-            graphics.PreferredBackBufferHeight = 640;
+            graphics.PreferredBackBufferWidth = windowWidth;
+            graphics.PreferredBackBufferHeight = windowHeight;
         }
 
         /// <summary>
@@ -52,7 +54,7 @@ namespace TurnBased {
         protected override void LoadContent() {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            renderer = new Renderer(ContentManager);
+            renderer = new Renderer(windowWidth, windowHeight, ContentManager);
         }
 
         /// <summary>
@@ -97,6 +99,7 @@ namespace TurnBased {
             base.Draw(gameTime);
         }
 
+		// Move to a class
         private Queue<string> actions = new Queue<string>();
         private KeyboardState lastKeyBoardState;
         private MouseState lastMouseState;
