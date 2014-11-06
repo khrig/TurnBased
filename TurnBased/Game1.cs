@@ -50,7 +50,7 @@ namespace TurnBased {
         protected override void LoadContent() {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            renderer = new Renderer(windowWidth, windowHeight, ContentManager);
+            renderer = new Renderer(windowWidth, windowHeight, Content, GraphicsDevice);
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace TurnBased {
         protected override void Draw(GameTime gameTime) {
             GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
-            renderer.Draw(spriteBatch, worldController.GetModel());
+            renderer.Draw(spriteBatch, worldController.GetWorldModel());
             spriteBatch.End();
             base.Draw(gameTime);
         }

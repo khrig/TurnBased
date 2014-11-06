@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -14,13 +15,13 @@ namespace TurnBased {
         private Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
         private Dictionary<string, SpriteFont> fonts = new Dictionary<string, SpriteFont>();
 
-        public Renderer(int windowWidth, int windowHeight, ContentManager content) {
+        public Renderer(int windowWidth, int windowHeight, ContentManager content, GraphicsDevice graphicsDevice) {
 			this.windowWidth = windowWidth;
 			this.windowHeight = windowHeight;
-		
-            textures.Add("Rambo", TextureManager.CreateTexture(GraphicsDevice, 20, 20, Color.Green));
-            textures.Add("Terminator", TextureManager.CreateTexture(GraphicsDevice, 20, 20, Color.Green));
-            textures.Add("red", TextureManager.CreateTexture(GraphicsDevice, 20, 20, Color.Red));
+
+            textures.Add("Rambo", TextureManager.CreateTexture(graphicsDevice, 20, 20, Color.Green));
+            textures.Add("Terminator", TextureManager.CreateTexture(graphicsDevice, 20, 20, Color.Green));
+            textures.Add("red", TextureManager.CreateTexture(graphicsDevice, 20, 20, Color.Red));
             textures.Add("bkg", content.Load<Texture2D>("spaceship32x32"));
 			
             fonts.Add("normal", content.Load<SpriteFont>("monolight12"));
@@ -53,7 +54,7 @@ namespace TurnBased {
             });
 			
 			foreach(Entity entity in model.Entities) {
-				DrawTile(spriteBatch, ConvertToGridCenterPosition(entity.Position.X, entity.Position.Y), textures[entity.Name]);
+                DrawTile(spriteBatch, ConvertToGridCenterPosition(entity.Position.X, entity.Position.Y, textures[entity.Name]), textures[entity.Name]);
 			}
 		}
 		
@@ -61,12 +62,12 @@ namespace TurnBased {
 			int startx = 40;
             for (int i = 0; i < model.Entities.Count; i++) {
                 // Draw ui for showing selectable characters
-				var color = model.CurrentEntity.Name != null && model.Entities[i].Name == model.CurrentEntity.Name ? Color.Yellow : Color.White;
+				var color = model.CurrentEntity != null && model.Entities[i].Name == model.CurrentEntity.Name ? Color.Yellow : Color.White;
                 spriteBatch.DrawString(fonts["normal"], model.Entities[i].Name, new Vector2(startx + i*100, windowHeight - 70), color); 
             }
 		}
 
-        private Vector2 ConvertToGridCenterPosition(int x, int y, Texture2D texture) {
+        private Vector2 ConvertToGridCenterPosition(float x, float y, Texture2D texture) {
             int middleXMinusHalfSpriteWidth = tileCenter - (texture.Width/2), middleYMinusHalfSpriteHeight = tileCenter - (texture.Height/2);
             return new Vector2(x - (x % tileSizeX) + middleXMinusHalfSpriteWidth, y - (y % tileSizeY) + middleYMinusHalfSpriteHeight);
         }
