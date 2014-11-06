@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 
 namespace TurnBased.States {
-    public class AIState : State {
-		public AIState(WorldModel model) : base(model) {
+    public class AiState : State {
+		public AiState(WorldModel model) : base(model) {
 		}
 	
         public override void Act(string action) {
@@ -20,6 +20,7 @@ namespace TurnBased.States {
             Console.WriteLine("updating computer entities");
             // Move and shoot and shit
 
+            // when done:
             this.StateManager.Pop();
             this.StateManager.Push("player");
         }
