@@ -9,27 +9,31 @@ namespace TurnBased {
         private readonly Stack<State> states = new Stack<State>();
         private readonly Dictionary<string, State> availableStates = new Dictionary<string, State>();
 
-        internal void Act(string action) {
-			states.Peek().Act(action);
+        public void Act(string action) {
+            states.Peek().Act(action);
         }
 
-        internal void Add(string stateId, State state) {
+        public void Add(string stateId, State state) {
             state.StateManager = this;
             availableStates.Add(stateId, state);
         }
 
-        internal void Push(string stateId) {
+        public void Push(string stateId) {
             State state = availableStates[stateId];
             state.Init();
             states.Push(state);
         }
 
-        internal void Pop() {
+        public void Pop() {
             states.Pop();
         }
 
-        internal void Update(float deltaTime) {
+        public void Update(float deltaTime) {
             states.Peek().Update(deltaTime);
-        }   
+        }
+
+        public bool IsEmpty() {
+            return states.Count == 0;
+        }
     }
 }

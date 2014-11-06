@@ -44,7 +44,7 @@
     <Compile Include="StateManager.cs" />
     <Compile Include="WorldController.cs" />
     <Compile Include="WorldModel.cs" />
-    <Compile Include="States\AIState.cs" />
+    <Compile Include="States\AiState.cs" />
     <Compile Include="States\PlayerState.cs" />
     <Compile Include="States\State.cs" />
     <Compile Include="TextureManager.cs" />

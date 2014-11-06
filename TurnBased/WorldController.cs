@@ -12,7 +12,7 @@ namespace TurnBased {
 		
             stateManager = new StateManager();
             stateManager.Add("player", new PlayerState(model));
-            stateManager.Add("computer", new AIState(model));
+            stateManager.Add("computer", new AiState(model));
             stateManager.Push("player");
         }
 		
