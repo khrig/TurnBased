@@ -38,7 +38,6 @@ namespace TurnBased {
         /// and initialize them as well.
         /// </summary>
         protected override void Initialize() {
-            // TODO: Add your initialization logic here
             worldController = new WorldController();
 
             base.Initialize();
@@ -108,7 +107,7 @@ namespace TurnBased {
                 worldController.AddAction("changeCharacter");
             }
             if (lastMouseState.LeftButton == ButtonState.Pressed && currentMouseState.LeftButton == ButtonState.Released) {
-                worldController.AddAction("move;" + Mouse.GetState().X + "," + Mouse.GetState().Y);
+                worldController.AddAction("move;" + currentMouseState.X + "," + currentMouseState.Y);
             }
             lastKeyBoardState = currentKeyBoardState;
             lastMouseState = currentMouseState;

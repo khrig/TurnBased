@@ -6,8 +6,8 @@ using System.Text;
 
 namespace TurnBased.States {
     public class PlayerState : State {
-        private List<Entity> availableEntities = new List<Entity>();
-        private Queue<Entity> entityTurnOrder = new Queue<Entity>();
+        private readonly List<Entity> availableEntities = new List<Entity>();
+        private readonly Queue<Entity> entityTurnOrder = new Queue<Entity>();
 		
         public PlayerState(WorldModel model) : base(model) {
             availableEntities = new List<Entity>() {
@@ -20,7 +20,7 @@ namespace TurnBased.States {
             foreach (Entity entity in availableEntities) {
                 entity.Init();
                 entityTurnOrder.Enqueue(entity);
-				model.Entities.Add(entity);
+				WorldModel.Entities.Add(entity);
             }
         }
 
@@ -65,9 +65,9 @@ namespace TurnBased.States {
 		
 		private void SetCurrentEntity() {
 			if(entityTurnOrder.Count > 0)
-				model.CurrentEntity = entityTurnOrder.Peek();
-			else 
-				model.CurrentEntity = null;
+                WorldModel.CurrentEntity = entityTurnOrder.Peek();
+			else
+                WorldModel.CurrentEntity = null;
 		}
 
         public override void Update(float deltaTime) {

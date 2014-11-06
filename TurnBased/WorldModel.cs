@@ -13,7 +13,7 @@ namespace TurnBased {
 
         public WorldModel(Grid background) {
             Background = background;
-			Entities = List<Entity>();
+			Entities = new List<Entity>();
 			CurrentEntity = null;
         }
 		

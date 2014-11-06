@@ -59,7 +59,7 @@ namespace TurnBased {
 		
 		private void DrawUI(SpriteBatch spriteBatch, WorldModel model) {
 			int startx = 40;
-            for (int i = 0; i < entities.Count; i++) {
+            for (int i = 0; i < model.Entities.Count; i++) {
                 // Draw ui for showing selectable characters
 				var color = model.CurrentEntity.Name != null && model.Entities[i].Name == model.CurrentEntity.Name ? Color.Yellow : Color.White;
                 spriteBatch.DrawString(fonts["normal"], model.Entities[i].Name, new Vector2(startx + i*100, windowHeight - 70), color); 
@@ -67,7 +67,7 @@ namespace TurnBased {
 		}
 
         private Vector2 ConvertToGridCenterPosition(int x, int y, Texture2D texture) {
-            int middleXMinusHalfSpriteWidth = tileCenter - (texture.White/2), middleYMinusHalfSpriteHeight = tileCenter - (texture.Height/2);
+            int middleXMinusHalfSpriteWidth = tileCenter - (texture.Width/2), middleYMinusHalfSpriteHeight = tileCenter - (texture.Height/2);
             return new Vector2(x - (x % tileSizeX) + middleXMinusHalfSpriteWidth, y - (y % tileSizeY) + middleYMinusHalfSpriteHeight);
         }
 		
