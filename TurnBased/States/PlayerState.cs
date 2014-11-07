@@ -11,8 +11,8 @@ namespace TurnBased.States {
 		
         public PlayerState(WorldModel model) : base(model) {
             availableEntities = new List<Entity>() {
-                new Entity("Rambo", new Vector2(50, 50)),
-                new Entity("Terminator", new Vector2(100, 100))
+                new Entity("Rambo", new Vector2(1, 1)),
+                new Entity("Terminator", new Vector2(0, 1))
             };
 
             WorldModel.Entities.AddRange(availableEntities);

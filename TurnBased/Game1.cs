@@ -41,7 +41,6 @@ namespace TurnBased {
         /// </summary>
         protected override void Initialize() {
             worldController = new WorldController();
-            ui = new UI(worldController);
             worldViewSettings = new WorldViewSettings {
                 WindowWidth = windowWidth,
                 WindowHeight = windowHeight,
@@ -50,6 +49,7 @@ namespace TurnBased {
                 TileSizeY = 64,
                 GridBounds = new Rectangle(0,0, 640, 512)
             };
+            ui = new UI(worldViewSettings, worldController);
             base.Initialize();
         }
 
@@ -60,7 +60,7 @@ namespace TurnBased {
         protected override void LoadContent() {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            renderer = new Renderer(worldViewSettings, content, GraphicsDevice);
+            renderer = new Renderer(worldViewSettings, Content, GraphicsDevice);
         }
 
         /// <summary>

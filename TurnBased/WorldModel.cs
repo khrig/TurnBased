@@ -27,7 +27,7 @@ namespace TurnBased {
 
         private Vector2 GetCharacterMove(string action) {
             string[] arr = action.Split(';')[1].Split(',');
-            return Vector2(int.Parse(arr[0]), int.Parse(arr[1]));
+            return new Vector2(int.Parse(arr[0]), int.Parse(arr[1]));
         }
     }
 }
