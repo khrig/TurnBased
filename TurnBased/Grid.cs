@@ -23,9 +23,9 @@ namespace TurnBased {
         }
 
         public void ForeachTile(Action<int, int, string> action) {
-            for (int y = 0; y <= grid.GetUpperBound(1); y++) {
-                for (int x = 0; x <= grid.GetUpperBound(0); x++) {
-                    action(x, y, grid[x, y]);
+            for (int y = 0; y <= grid.GetUpperBound(0); y++) {
+                for (int x = 0; x <= grid.GetUpperBound(1); x++) {
+                    action(x, y, grid[y, x]);
                 }
             }
         }

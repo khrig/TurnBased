@@ -51,16 +51,14 @@ namespace TurnBased {
 
         private string[,] GetBackground() {
             return new string[,] {
-                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
-                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
-                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
-                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
-                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
-                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
-                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
-                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" },
-                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" },
-                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
+                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
+                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
+                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
+                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
+                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
+                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
+                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
+                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }
             };
         }
     }
