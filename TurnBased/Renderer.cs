@@ -17,10 +17,13 @@ namespace TurnBased {
         public Renderer(IWorldViewSettings worldViewSettings, ContentManager content, GraphicsDevice graphicsDevice) {
             this.worldViewSettings = worldViewSettings;
 
-            textures.Add("Rambo", TextureManager.CreateTexture(graphicsDevice, 20, 20, Color.Green));
-            textures.Add("Terminator", TextureManager.CreateTexture(graphicsDevice, 20, 20, Color.Green));
+            textures.Add("Rambo", content.Load<Texture2D>("marine1-t"));
+            textures.Add("Terminator", content.Load<Texture2D>("marine3-t"));
             textures.Add("red", TextureManager.CreateTexture(graphicsDevice, 20, 20, Color.Red));
-            textures.Add("bkg", content.Load<Texture2D>("spaceship32x32"));
+            //textures.Add("bkg", content.Load<Texture2D>("spaceship32x32"));
+            textures.Add("sand", content.Load<Texture2D>("sanddirt"));
+            textures.Add("sand32", content.Load<Texture2D>("sanddirt32"));
+            textures.Add("bkg", content.Load<Texture2D>("sanddirt32"));
 			
             fonts.Add("normal", content.Load<SpriteFont>("monolight12"));
         }
@@ -50,7 +53,12 @@ namespace TurnBased {
 			model.Background.ForeachTile((x, y, sprite) => DrawTile(spriteBatch, ConvertToViewPosition(x, y), textures[sprite], 2));
 			
 			foreach(Entity entity in model.Entities) {
-                DrawTile(spriteBatch, ConvertToGridCenterPosition(entity.Position.X * worldViewSettings.TileSizeX, entity.Position.Y * worldViewSettings.TileSizeY, textures[entity.Name]), textures[entity.Name]);
+                // brutally shitty code
+                if (entity.Name == "Rambo" || entity.Name == "Terminator") {
+                    Rectangle sourcerect = new Rectangle(24 , 64, 24, 32);
+                    DrawTile(spriteBatch, ConvertToGridCenterPosition(entity.Position.X * worldViewSettings.TileSizeX, entity.Position.Y * worldViewSettings.TileSizeY, textures[entity.Name], sourcerect.Width, sourcerect.Height), textures[entity.Name], sourcerect);
+                } else
+                    DrawTile(spriteBatch, ConvertToGridCenterPosition(entity.Position.X * worldViewSettings.TileSizeX, entity.Position.Y * worldViewSettings.TileSizeY, textures[entity.Name], textures[entity.Name].Width, textures[entity.Name].Height), textures[entity.Name]);
 			}
 		}
 		
@@ -63,9 +71,9 @@ namespace TurnBased {
             }
 		}
 
-        private Vector2 ConvertToGridCenterPosition(float x, float y, Texture2D texture) {
-            int middleXMinusHalfSpriteWidth = worldViewSettings.TileCenter - (texture.Width/2);
-            int middleYMinusHalfSpriteHeight = worldViewSettings.TileCenter - (texture.Height/2);
+        private Vector2 ConvertToGridCenterPosition(float x, float y, Texture2D texture, int textureWidth, int textureHeight) {
+            int middleXMinusHalfSpriteWidth = worldViewSettings.TileCenter - (textureWidth / 2);
+            int middleYMinusHalfSpriteHeight = worldViewSettings.TileCenter - (textureHeight / 2);
             return new Vector2(x - (x % worldViewSettings.TileSizeX) + middleXMinusHalfSpriteWidth, y - (y % worldViewSettings.TileSizeY) + middleYMinusHalfSpriteHeight);
 		}
 
@@ -79,6 +87,10 @@ namespace TurnBased {
 
         private void DrawTile(SpriteBatch spriteBatch, Vector2 position, Texture2D sprite, float scale) {
             spriteBatch.Draw(sprite, position, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+        }
+
+        private void DrawTile(SpriteBatch spriteBatch, Vector2 position, Texture2D texture, Rectangle frameRect) {
+            spriteBatch.Draw(texture, position, frameRect, Color.White);
         }
     }
 }

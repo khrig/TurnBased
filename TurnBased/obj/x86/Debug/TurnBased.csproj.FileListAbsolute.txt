@@ -25,3 +25,9 @@ C:\Code\TurnBased\TurnBased\obj\x86\Debug\TurnBased.exe
 C:\Code\TurnBased\TurnBased\obj\x86\Debug\TurnBased.pdb
 C:\Code\TurnBased\TurnBased\bin\Windows\Debug\Content\monolight12.xnb
 C:\Code\TurnBased\TurnBased\bin\Windows\Debug\Content\spaceship32x32.png
+C:\Code\TurnBased\TurnBased\bin\Windows\Debug\Content\sanddirt.png
+C:\Code\TurnBased\TurnBased\bin\Windows\Debug\Content\sanddirt32.png
+C:\Code\TurnBased\TurnBased\bin\Windows\Debug\Content\characters-32x32.png
+C:\Code\TurnBased\TurnBased\bin\Windows\Debug\Content\marine1-t.png
+C:\Code\TurnBased\TurnBased\bin\Windows\Debug\Content\marine3-t.png
+C:\Code\TurnBased\TurnBased\bin\Windows\Debug\Content\robot-t.png
