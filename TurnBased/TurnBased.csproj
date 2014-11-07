@@ -38,16 +38,19 @@
     <Compile Include="Entity.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Grid.cs" />
+    <Compile Include="Interfaces\IWorldViewSettings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderer.cs" />
     <Compile Include="StateManager.cs" />
+    <Compile Include="UI.cs" />
     <Compile Include="WorldController.cs" />
     <Compile Include="WorldModel.cs" />
     <Compile Include="States\AiState.cs" />
     <Compile Include="States\PlayerState.cs" />
     <Compile Include="States\State.cs" />
     <Compile Include="TextureManager.cs" />
+    <Compile Include="WorldViewSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
