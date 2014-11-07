@@ -42,14 +42,14 @@ namespace TurnBased {
                     Vector2 gridCoordinates = ConvertToGridCoordinates(currentMouseState.X, currentMouseState.Y);
                     worldController.AddAction("move;" + gridCoordinates.X + "," + gridCoordinates.Y);
                 }
-                else if (ClicIsOnUI(currentMouseState)) {
+                else if (ClickIsOnUI(currentMouseState)) {
                     
                 }
             }
             return currentMouseState;
         }
 
-        private bool ClicIsOnUI(MouseState currentMouseState) {
+        private bool ClickIsOnUI(MouseState currentMouseState) {
             return false;
         }
 
