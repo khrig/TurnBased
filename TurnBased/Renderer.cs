@@ -47,9 +47,7 @@ namespace TurnBased {
         }
 		
 		private void DrawWorld(SpriteBatch spriteBatch, WorldModel model) {
-			model.Background.ForeachTile((x, y, sprite) => {
-                DrawTile(spriteBatch, new Vector2(x * worldViewSettings.TileSizeX, y * worldViewSettings.TileSizeY), textures[sprite], 2);
-            });
+			model.Background.ForeachTile((x, y, sprite) => DrawTile(spriteBatch, ConvertToViewPosition(x, y), textures[sprite], 2));
 			
 			foreach(Entity entity in model.Entities) {
                 DrawTile(spriteBatch, ConvertToGridCenterPosition(entity.Position.X * worldViewSettings.TileSizeX, entity.Position.Y * worldViewSettings.TileSizeY, textures[entity.Name]), textures[entity.Name]);
@@ -66,9 +64,14 @@ namespace TurnBased {
 		}
 
         private Vector2 ConvertToGridCenterPosition(float x, float y, Texture2D texture) {
-            int middleXMinusHalfSpriteWidth = worldViewSettings.TileCenter - (texture.Width / 2), middleYMinusHalfSpriteHeight = worldViewSettings.TileCenter - (texture.Height / 2);
+            int middleXMinusHalfSpriteWidth = worldViewSettings.TileCenter - (texture.Width/2);
+            int middleYMinusHalfSpriteHeight = worldViewSettings.TileCenter - (texture.Height/2);
             return new Vector2(x - (x % worldViewSettings.TileSizeX) + middleXMinusHalfSpriteWidth, y - (y % worldViewSettings.TileSizeY) + middleYMinusHalfSpriteHeight);
 		}
+
+        private Vector2 ConvertToViewPosition(int x, int y) {
+            return new Vector2(worldViewSettings.GridBounds.Location.X + (x * worldViewSettings.TileSizeX), worldViewSettings.GridBounds.Location.Y + (y * worldViewSettings.TileSizeY));
+        }
     
         private void DrawTile(SpriteBatch spriteBatch, Vector2 position, Texture2D sprite) {
             spriteBatch.Draw(sprite, position, Color.White);
