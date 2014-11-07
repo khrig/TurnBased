@@ -17,8 +17,10 @@ namespace TurnBased {
     public class Game1 : Game {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Renderer renderer;
-		WorldController worldController;
+        private Renderer renderer;
+		private WorldController worldController;
+        private UI ui;
+        private WorldViewSettings worldViewSettings;
 		private int windowWidth = 640;
 		private int windowHeight = 640;
 		
@@ -39,7 +41,15 @@ namespace TurnBased {
         /// </summary>
         protected override void Initialize() {
             worldController = new WorldController();
-
+            ui = new UI(worldController);
+            worldViewSettings = new WorldViewSettings {
+                WindowWidth = windowWidth,
+                WindowHeight = windowHeight,
+                TileCenter = 32,
+                TileSizeX = 64,
+                TileSizeY = 64,
+                GridBounds = new Rectangle(0,0, 640, 512)
+            };
             base.Initialize();
         }
 
@@ -50,7 +60,7 @@ namespace TurnBased {
         protected override void LoadContent() {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            renderer = new Renderer(windowWidth, windowHeight, ContentManager);
+            renderer = new Renderer(worldViewSettings, ContentManager);
         }
 
         /// <summary>
@@ -70,7 +80,7 @@ namespace TurnBased {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            HandleInput(); // Inputmanager -> with reference to worldcontroller or something
+            ui.HandleInput();
             worldController.Update(gameTime);
             if (worldController.End()) {
                 Exit();
@@ -89,28 +99,6 @@ namespace TurnBased {
             renderer.Draw(spriteBatch, worldController.GetModel());
             spriteBatch.End();
             base.Draw(gameTime);
-        }
-
-		// Move to a class
-        private KeyboardState lastKeyBoardState;
-        private MouseState lastMouseState;
-        private void HandleInput() {
-            KeyboardState currentKeyBoardState = Keyboard.GetState();
-            MouseState currentMouseState = Mouse.GetState();
-            if (lastKeyBoardState.IsKeyDown(Keys.S) && currentKeyBoardState.IsKeyUp(Keys.S)) {
-                worldController.AddAction("shoot");
-            }
-            if (lastKeyBoardState.IsKeyDown(Keys.Space) && currentKeyBoardState.IsKeyUp(Keys.Space)) {
-                worldController.AddAction("weapon");
-            }
-            if (lastKeyBoardState.IsKeyDown(Keys.G) && currentKeyBoardState.IsKeyUp(Keys.G)) {
-                worldController.AddAction("changeCharacter");
-            }
-            if (lastMouseState.LeftButton == ButtonState.Pressed && currentMouseState.LeftButton == ButtonState.Released) {
-                worldController.AddAction("move;" + currentMouseState.X + "," + currentMouseState.Y);
-            }
-            lastKeyBoardState = currentKeyBoardState;
-            lastMouseState = currentMouseState;
         }
     }
 }

@@ -18,7 +18,16 @@ namespace TurnBased {
         }
 		
 		public bool Valid(string action) {
+		    if (action.StartsWith("move")) {
+		        Vector2 characterMove = GetCharacterMove(action);
+		        return !Entities.Any(e => e.Position.X == characterMove.X && e.Position.Y == characterMove.Y);
+		    }
 			return true;
 		}
+
+        private Vector2 GetCharacterMove(string action) {
+            string[] arr = action.Split(';')[1].Split(',');
+            return Vector2(int.Parse(arr[0]), int.Parse(arr[1]));
+        }
     }
 }

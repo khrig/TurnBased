@@ -4,19 +4,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TurnBased.Interfaces;
 
 namespace TurnBased {
     public class Renderer {
-        private int tileSizeX = 64, tileSizeY = 64;
-		private int tileCenter = 32; 
-		private int windowWidth, windowHeight;
+        private readonly IWorldViewSettings worldViewSettings;
 
         private Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
         private Dictionary<string, SpriteFont> fonts = new Dictionary<string, SpriteFont>();
 
-        public Renderer(int windowWidth, int windowHeight, ContentManager content) {
-			this.windowWidth = windowWidth;
-			this.windowHeight = windowHeight;
+        public Renderer(IWorldViewSettings worldViewSettings, ContentManager content) {
+            this.worldViewSettings = worldViewSettings;
 		
             textures.Add("Rambo", TextureManager.CreateTexture(GraphicsDevice, 20, 20, Color.Green));
             textures.Add("Terminator", TextureManager.CreateTexture(GraphicsDevice, 20, 20, Color.Green));
@@ -49,11 +47,11 @@ namespace TurnBased {
 		
 		private void DrawWorld(SpriteBatch spriteBatch, WorldModel model) {
 			model.Background.ForeachTile((x, y, sprite) => {
-                DrawTile(spriteBatch, new Vector2(x * tileSizeX, y * tileSizeY), textures[sprite], 2);
+                DrawTile(spriteBatch, new Vector2(x * worldViewSettings.TileSizeX, y * worldViewSettings.TileSizeY), textures[sprite], 2);
             });
 			
 			foreach(Entity entity in model.Entities) {
-				DrawTile(spriteBatch, ConvertToGridCenterPosition(entity.Position.X, entity.Position.Y), textures[entity.Name]);
+                DrawTile(spriteBatch, ConvertToGridCenterPosition(entity.Position.X * worldViewSettings.TileSizeX, entity.Position.Y * worldViewSettings.TileSizeY), textures[entity.Name]);
 			}
 		}
 		
@@ -62,13 +60,13 @@ namespace TurnBased {
             for (int i = 0; i < model.Entities.Count; i++) {
                 // Draw ui for showing selectable characters
 				var color = model.CurrentEntity.Name != null && model.Entities[i].Name == model.CurrentEntity.Name ? Color.Yellow : Color.White;
-                spriteBatch.DrawString(fonts["normal"], model.Entities[i].Name, new Vector2(startx + i*100, windowHeight - 70), color); 
+                spriteBatch.DrawString(fonts["normal"], model.Entities[i].Name, new Vector2(startx + i * 100, worldViewSettings.WindowHeight - 70), color); 
             }
 		}
 
         private Vector2 ConvertToGridCenterPosition(int x, int y, Texture2D texture) {
-            int middleXMinusHalfSpriteWidth = tileCenter - (texture.Width/2), middleYMinusHalfSpriteHeight = tileCenter - (texture.Height/2);
-            return new Vector2(x - (x % tileSizeX) + middleXMinusHalfSpriteWidth, y - (y % tileSizeY) + middleYMinusHalfSpriteHeight);
+            int middleXMinusHalfSpriteWidth = worldViewSettings.TileCenter - (texture.Width / 2), middleYMinusHalfSpriteHeight = worldViewSettings.TileCenter - (texture.Height / 2);
+            return new Vector2(x - (x % worldViewSettings.TileSizeX) + middleXMinusHalfSpriteWidth, y - (y % worldViewSettings.TileSizeY) + middleYMinusHalfSpriteHeight);
         }
 		
         private void DrawTile(SpriteBatch spriteBatch, Vector2 position, Texture2D sprite) {
