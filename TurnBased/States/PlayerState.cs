@@ -11,17 +11,19 @@ namespace TurnBased.States {
 		
         public PlayerState(WorldModel model) : base(model) {
             availableEntities = new List<Entity>() {
-                    new Entity("Rambo", new Vector2(50, 50)),
-                    new Entity("Terminator", new Vector2(100, 100))
-                };
+                new Entity("Rambo", new Vector2(50, 50)),
+                new Entity("Terminator", new Vector2(100, 100))
+            };
+
+            WorldModel.Entities.AddRange(availableEntities);
         }
 
         public override void Init() {
             foreach (Entity entity in availableEntities) {
                 entity.Init();
                 entityTurnOrder.Enqueue(entity);
-				WorldModel.Entities.Add(entity);
             }
+            SetCurrentEntity();
         }
 
         public override void Act(string action) {
@@ -53,7 +55,7 @@ namespace TurnBased.States {
 
         private Vector2 GetCharacterMove(string action) {
             string[] arr = action.Split(';')[1].Split(',');
-            return Vector2(int.Parse(arr[0]), int.Parse(arr[1]));
+            return new Vector2(int.Parse(arr[0]), int.Parse(arr[1]));
         }
 
         private void PutNextCharacterFirstInQueue() {
