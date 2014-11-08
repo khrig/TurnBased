@@ -23,7 +23,7 @@ http://msdn.microsoft.com/en-us/library/bb447674.aspx
   - Change Weapon/Spell on your turn
   - Select an enemy / Empty grid (for grenades etc) / shoot button
   - End turn button for character
-  - Show valid grid moves - http://wonderfl.net/c/bRV8
+  - ~~Show valid grid moves - http://wonderfl.net/c/bRV8~~
 * Computer makes turn
   - Move if not in range
   - Shoot at nearest enemy
