@@ -61,11 +61,11 @@ namespace TurnBased {
 
         public void DrawGridLines(SpriteBatch spriteBatch, WorldModel model) {
             model.Background.ForeachColumn((x) => {
-                Rectangle rectangle = new Rectangle((int)(x * worldViewSettings.TileSizeX), 0, 1, worldViewSettings.GridBounds.Height);
+                Rectangle rectangle = new Rectangle((int)((x+1) * worldViewSettings.TileSizeX), 0, 1, worldViewSettings.GridBounds.Height);
                 spriteBatch.Draw(textures["black"], rectangle, Color.Red);
             });
             model.Background.ForeachRow((y) => {
-                Rectangle rectangle = new Rectangle(0, (int)(y * worldViewSettings.TileSizeY), worldViewSettings.GridBounds.Width, 1);
+                Rectangle rectangle = new Rectangle(0, (int)((y+1) * worldViewSettings.TileSizeY), worldViewSettings.GridBounds.Width, 1);
                 spriteBatch.Draw(textures["black"], rectangle, Color.Red);
             });
         }

@@ -44,9 +44,9 @@ namespace TurnBased {
             worldViewSettings = new WorldViewSettings {
                 WindowWidth = windowWidth,
                 WindowHeight = windowHeight,
-                TileCenter = 32,
-                TileSizeX = 64,
-                TileSizeY = 64,
+                TileCenter = 16,
+                TileSizeX = 32,
+                TileSizeY = 32,
                 GridBounds = new Rectangle(0,0, 640, 512)
             };
             ui = new UI(worldViewSettings, worldController);
