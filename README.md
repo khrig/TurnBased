@@ -5,10 +5,10 @@ Scale depending on resolution
 http://msdn.microsoft.com/en-us/library/bb447674.aspx
 
 * Grid to move on
-  - Small grid like 8x8 or something
-  - Not move outside
-  - Only move to unoccupied grid area
-  - No obstacles
+  - ~~Small grid like 8x8 or something~~
+  - ~~Not move outside~~
+  - ~~Only move to unoccupied grid area~~
+  - ~~No obstacles~~
 * Mechanics
   - Simple spells/weapons -> does 1 damage
   - Move only one grid at a time
