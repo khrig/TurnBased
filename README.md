@@ -10,7 +10,7 @@ http://msdn.microsoft.com/en-us/library/bb447674.aspx
   - ~~Only move to unoccupied grid area~~
   - ~~No obstacles~~
 * Mechanics
-  - Move only one square at a time
+  - ~~Move only one square at a time~~
   - Simple spells/weapons -> does 1 damage
   - Animation for movement - http://gamedev.stackexchange.com/questions/31410/keeping-player-aligned-to-grid-in-pacman
   - Shoot range
@@ -20,6 +20,8 @@ http://msdn.microsoft.com/en-us/library/bb447674.aspx
   - Change character to one that is not yet done this turn
   - Show selected character
   - Show character as done
+  - Show action points left
+  - Show character health
   - Change Weapon/Spell on your turn
   - Select an enemy / Empty grid (for grenades etc) / shoot button
   - End turn button for character
