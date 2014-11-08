@@ -20,8 +20,9 @@ namespace TurnBased {
             textures.Add("rambo", content.Load<Texture2D>("marine1-t"));
             textures.Add("terminator", content.Load<Texture2D>("marine3-t"));
             textures.Add("robot", content.Load<Texture2D>("robot-t"));
-            textures.Add("black", TextureManager.CreateTexture(graphicsDevice, 1, 1, Color.Black));
-            //textures.Add("bkg", content.Load<Texture2D>("spaceship32x32"));
+            textures.Add("black", TextureManager.CreateTexture(graphicsDevice, 1, 1, Color.Black * 0.3f));
+            textures.Add("green", TextureManager.CreateTexture(graphicsDevice, 32, 32, Color.LightGreen * 0.3f));
+            textures.Add("red", TextureManager.CreateTexture(graphicsDevice, 32, 32, Color.Red * 0.3f));
             textures.Add("sand", content.Load<Texture2D>("sanddirt"));
             textures.Add("sand32", content.Load<Texture2D>("sanddirt32"));
             textures.Add("bkg", content.Load<Texture2D>("sanddirt32"));
@@ -51,9 +52,18 @@ namespace TurnBased {
         }
 		
 		private void DrawWorld(SpriteBatch spriteBatch, WorldModel model) {
+            spriteBatch.Begin();
             DrawBackground(spriteBatch, model);
+            spriteBatch.End();
+            
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
             DrawGridLines(spriteBatch, model);
+            DrawAvailableMoves(spriteBatch, model);
+            spriteBatch.End();
+
+            spriteBatch.Begin();
             DrawEntities(spriteBatch, model);
+            spriteBatch.End();
 		}
 
         private void DrawBackground(SpriteBatch spriteBatch, WorldModel model) {
@@ -71,6 +81,16 @@ namespace TurnBased {
             });
         }
 
+        private void DrawAvailableMoves(SpriteBatch spriteBatch, WorldModel model) {
+            if (model.CurrentEntity != null) {
+                Vector2 position = model.CurrentEntity.Position;
+                DrawTile(spriteBatch, ConvertToViewPosition(model.CurrentEntity.Position), textures["green"], Color.LightGreen * 0.3f);
+                foreach (var pos in model.GetNearestValidPositions(position)) {
+                    DrawTile(spriteBatch, ConvertToViewPosition(pos), textures["green"], Color.LightGreen * 0.3f);
+                }
+            }
+        }
+
         private void DrawEntities(SpriteBatch spriteBatch, WorldModel model) {
 
             foreach (Entity entity in model.Entities) {
@@ -85,6 +105,8 @@ namespace TurnBased {
         }
 		
 		private void DrawUI(SpriteBatch spriteBatch, WorldModel model) {
+            spriteBatch.Begin();
+
 			int startx = 40;
             for (int i = 0; i < model.Entities.Count; i++) {
                 // Draw ui for showing selectable characters
@@ -93,6 +115,8 @@ namespace TurnBased {
                     spriteBatch.DrawString(fonts["normal"], model.Entities[i].Name, new Vector2(startx + i * 100, worldViewSettings.WindowHeight - 70), color);
                 }
             }
+
+            spriteBatch.End();
 		}
 
         private Vector2 ConvertToGridCenterPosition(float x, float y, Texture2D texture, int textureWidth, int textureHeight) {
@@ -101,12 +125,22 @@ namespace TurnBased {
             return new Vector2(x - (x % worldViewSettings.TileSizeX) + middleXMinusHalfSpriteWidth, y - (y % worldViewSettings.TileSizeY) + middleYMinusHalfSpriteHeight);
 		}
 
+        private Vector2 ConvertToViewPosition(Vector2 pos) {
+            pos.X = worldViewSettings.GridBounds.Location.X + (pos.X * worldViewSettings.TileSizeX);
+            pos.Y = worldViewSettings.GridBounds.Location.Y + (pos.Y * worldViewSettings.TileSizeY);
+            return pos;
+        }
+
         private Vector2 ConvertToViewPosition(int x, int y) {
             return new Vector2(worldViewSettings.GridBounds.Location.X + (x * worldViewSettings.TileSizeX), worldViewSettings.GridBounds.Location.Y + (y * worldViewSettings.TileSizeY));
         }
     
         private void DrawTile(SpriteBatch spriteBatch, Vector2 position, Texture2D sprite) {
             spriteBatch.Draw(sprite, position, Color.White);
+        }
+
+        private void DrawTile(SpriteBatch spriteBatch, Vector2 position, Texture2D sprite, Color color) {
+            spriteBatch.Draw(sprite, position, color);
         }
 
         private void DrawTile(SpriteBatch spriteBatch, Vector2 position, Texture2D sprite, float scale) {

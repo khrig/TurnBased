@@ -20,17 +20,25 @@ namespace TurnBased {
 		public bool Valid(string action) {
 		    if (action.StartsWith("move")) {
 		        Vector2 characterMove = GetCharacterMove(action);
-                return IsOnGrid(characterMove) && !SquareOccupied(characterMove);
+                return IsValidOnGrid(characterMove) && AnyMatchingPosition(GetNearestValidPositions(CurrentEntity.Position), characterMove);
 		    }
 			return true;
 		}
 
-        private bool IsOnGrid(Vector2 characterMove) {
+        public IEnumerable<Vector2> GetNearestValidPositions(Vector2 position) {
+            return Background.GetNearestPositions((int)position.X, (int)position.Y).Where(p => !SquareOccupied(p));
+        }
+
+        private bool IsValidOnGrid(Vector2 characterMove) {
             return Background.IsValid((int)characterMove.X, (int)characterMove.Y);
         }
 
-        private bool SquareOccupied(Vector2 characterMove) {
-            return Entities.Any(e => e.Position.X == characterMove.X && e.Position.Y == characterMove.Y);
+        private bool SquareOccupied(Vector2 position) {
+            return AnyMatchingPosition(Entities.Select(e => e.Position), position);
+        }
+
+        private bool AnyMatchingPosition(IEnumerable<Vector2> enumerable, Vector2 position) {
+            return enumerable.Any(p => p.X == position.X && p.Y == position.Y);
         }
 
         private Vector2 GetCharacterMove(string action) {
