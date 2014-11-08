@@ -29,5 +29,17 @@ namespace TurnBased {
                 }
             }
         }
+
+        public void ForeachColumn(Action<int> action) {
+            for (int x = 0; x <= grid.GetUpperBound(1); x++) {
+                action(x);
+            }
+        }
+
+        public void ForeachRow(Action<int> action) {
+            for (int y = 0; y <= grid.GetUpperBound(0); y++) {
+                action(y);
+            }
+        }
     }
 }
