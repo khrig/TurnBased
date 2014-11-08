@@ -10,7 +10,7 @@ http://msdn.microsoft.com/en-us/library/bb447674.aspx
   - ~~Only move to unoccupied grid area~~
   - ~~No obstacles~~
 * Mechanics
-  - Move only one grid at a time
+  - Move only one square at a time
   - Simple spells/weapons -> does 1 damage
   - Animation for movement - http://gamedev.stackexchange.com/questions/31410/keeping-player-aligned-to-grid-in-pacman
   - Shoot range
