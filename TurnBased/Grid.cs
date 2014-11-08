@@ -41,5 +41,9 @@ namespace TurnBased {
                 action(y);
             }
         }
+
+        internal bool IsValid(int x, int y) {
+            return x >= 0 && x <= grid.GetUpperBound(1) && y >= 0 && y <= grid.GetUpperBound(0);
+        }
     }
 }

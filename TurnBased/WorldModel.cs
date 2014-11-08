@@ -20,10 +20,18 @@ namespace TurnBased {
 		public bool Valid(string action) {
 		    if (action.StartsWith("move")) {
 		        Vector2 characterMove = GetCharacterMove(action);
-		        return !Entities.Any(e => e.Position.X == characterMove.X && e.Position.Y == characterMove.Y);
+                return IsOnGrid(characterMove) && !SquareOccupied(characterMove);
 		    }
 			return true;
 		}
+
+        private bool IsOnGrid(Vector2 characterMove) {
+            return Background.IsValid((int)characterMove.X, (int)characterMove.Y);
+        }
+
+        private bool SquareOccupied(Vector2 characterMove) {
+            return Entities.Any(e => e.Position.X == characterMove.X && e.Position.Y == characterMove.Y);
+        }
 
         private Vector2 GetCharacterMove(string action) {
             string[] arr = action.Split(';')[1].Split(',');
