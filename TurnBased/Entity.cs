@@ -10,6 +10,7 @@ namespace TurnBased {
         private int energy = 0;
         public string Name { get; private set; }
         public Vector2 Position { get; set; }
+        public bool PlayerControlled { get; set; }
 
         public Entity(string name, Vector2 position) {
             this.Name = name;

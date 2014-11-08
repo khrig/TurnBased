@@ -17,8 +17,9 @@ namespace TurnBased {
         public Renderer(IWorldViewSettings worldViewSettings, ContentManager content, GraphicsDevice graphicsDevice) {
             this.worldViewSettings = worldViewSettings;
 
-            textures.Add("Rambo", content.Load<Texture2D>("marine1-t"));
-            textures.Add("Terminator", content.Load<Texture2D>("marine3-t"));
+            textures.Add("rambo", content.Load<Texture2D>("marine1-t"));
+            textures.Add("terminator", content.Load<Texture2D>("marine3-t"));
+            textures.Add("robot", content.Load<Texture2D>("robot-t"));
             textures.Add("black", TextureManager.CreateTexture(graphicsDevice, 1, 1, Color.Black));
             //textures.Add("bkg", content.Load<Texture2D>("spaceship32x32"));
             textures.Add("sand", content.Load<Texture2D>("sanddirt"));
@@ -74,7 +75,7 @@ namespace TurnBased {
 
             foreach (Entity entity in model.Entities) {
                 // brutally shitty code
-                if (entity.Name == "Rambo" || entity.Name == "Terminator") {
+                if (entity.Name == "rambo" || entity.Name == "terminator" || entity.Name == "robot") {
                     Rectangle sourcerect = new Rectangle(24, 64, 24, 32);
                     DrawTile(spriteBatch, ConvertToGridCenterPosition(entity.Position.X * worldViewSettings.TileSizeX, entity.Position.Y * worldViewSettings.TileSizeY, textures[entity.Name], sourcerect.Width, sourcerect.Height), textures[entity.Name], sourcerect);
                 }
@@ -87,8 +88,10 @@ namespace TurnBased {
 			int startx = 40;
             for (int i = 0; i < model.Entities.Count; i++) {
                 // Draw ui for showing selectable characters
-				var color = model.CurrentEntity != null && model.Entities[i].Name == model.CurrentEntity.Name ? Color.Yellow : Color.White;
-                spriteBatch.DrawString(fonts["normal"], model.Entities[i].Name, new Vector2(startx + i * 100, worldViewSettings.WindowHeight - 70), color); 
+                if (model.Entities[i].PlayerControlled) {
+                    var color = model.CurrentEntity != null && model.Entities[i].Name == model.CurrentEntity.Name ? Color.Yellow : Color.White;
+                    spriteBatch.DrawString(fonts["normal"], model.Entities[i].Name, new Vector2(startx + i * 100, worldViewSettings.WindowHeight - 70), color);
+                }
             }
 		}
 
