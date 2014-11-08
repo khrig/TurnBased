@@ -8,7 +8,6 @@ using System.Text;
 namespace TurnBased {
     public class Grid {
         private readonly string[,] grid;
-        private readonly Random random = new Random();
 
         public Grid(string[,] grid) {
             this.grid = grid;
@@ -42,7 +41,7 @@ namespace TurnBased {
             }
         }
 
-        internal bool IsValid(int x, int y) {
+        public bool IsValid(int x, int y) {
             return x >= 0 && x <= grid.GetUpperBound(1) && y >= 0 && y <= grid.GetUpperBound(0);
         }
     }
