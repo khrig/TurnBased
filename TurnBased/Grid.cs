@@ -21,10 +21,17 @@ namespace TurnBased {
             return grid[x, y];
         }
 
-        public List<Point> GetNearestPositions(int x, int y, int searchLength) {
-            List<Point> nearestPositions = new List<Point>();
-            for (int i = 1; i < searchLength + 1; i++) {
-                throw new NotImplementedException();
+        public List<Vector2> GetNearestPositions(int x, int y, int length, int maxCost) {
+            List<Vector2> nearestPositions = new List<Vector2>();
+            int startPosX = Math.Max(x - length, grid.GetLowerBound(1));
+            int endPosX = Math.Min(x + length, grid.GetUpperBound(1));
+            int startPosY = Math.Max(y - length, grid.GetLowerBound(0));
+            int endPosY = Math.Min(y + length, grid.GetUpperBound(0));
+            for (int rowNum=startPosX; rowNum<=endPosX; rowNum++) {
+                for (int colNum=startPosY; colNum<=endPosY; colNum++) {
+                    if(EuclideanDistance(x, y, rowNum, colNum) <= maxCost && IsValid(rowNum, colNum))
+                        nearestPositions.Add(new Vector2(rowNum, colNum));
+                }
             }
             return nearestPositions;
         }
@@ -72,6 +79,13 @@ namespace TurnBased {
         // TODO: fix this brutally shitty code
         private bool IsBlockedTile(int x, int y) {
             return Tile(x, y) != "bkg";
+        }
+
+        private int EuclideanDistance(int x, int y, int rowNum, int colNum) {
+            double xd = x - rowNum;
+            double yd = y - colNum;
+            double sqrt = Math.Sqrt((xd*xd) + (yd*yd));
+            return (int)(sqrt * 10);
         }
     }
 }
