@@ -85,7 +85,7 @@ namespace TurnBased {
             if (model.CurrentEntity != null) {
                 Vector2 position = model.CurrentEntity.Position;
                 DrawTile(spriteBatch, ConvertToViewPosition(model.CurrentEntity.Position), textures["green"], Color.LightGreen * 0.3f);
-                foreach (var pos in model.GetNearestValidPositions(position)) {
+                foreach (var pos in model.GetNearestValidPositions()) {
                     DrawTile(spriteBatch, ConvertToViewPosition(pos), textures["green"], Color.LightGreen * 0.3f);
                 }
             }

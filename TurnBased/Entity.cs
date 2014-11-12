@@ -12,6 +12,14 @@ namespace TurnBased {
         public Vector2 Position { get; set; }
         public bool PlayerControlled { get; set; }
 
+        public int ActionPoints {
+            get {
+                return 4;
+            }
+        }
+
+        public int MoveLength { get { return ActionPoints * 10; } }
+
         public Entity(string name, Vector2 position) {
             this.Name = name;
             this.Position = position;
