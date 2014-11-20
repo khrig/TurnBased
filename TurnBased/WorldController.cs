@@ -23,6 +23,8 @@ namespace TurnBased {
 		
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             stateManager.Update(deltaTime);
+
+            model.RemoveDestroyedEntities();
         }
 		
         public void AddAction(string action) {

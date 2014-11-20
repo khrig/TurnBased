@@ -56,5 +56,9 @@ namespace TurnBased {
         private bool AnyMatchingPosition(IEnumerable<Vector2> enumerable, Vector2 position) {
             return enumerable.Any(p => p.X == position.X && p.Y == position.Y);
         }
+
+        public void RemoveDestroyedEntities() {
+            Entities.RemoveAll(e => e.IsDestroyed());
+        }
     }
 }
