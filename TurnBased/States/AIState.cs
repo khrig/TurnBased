@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TurnBased.Actions;
 
 namespace TurnBased.States {
     public class AiState : State {
@@ -16,8 +17,8 @@ namespace TurnBased.States {
 
             WorldModel.Entities.AddRange(availableEntities);
 		}
-	
-        public override void Act(string action) {
+
+        public override void Act(EntityAction action) {
 
         }
 

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TurnBased.Actions;
 
 namespace TurnBased.States {
     public class PlayerState : State {
@@ -26,22 +27,27 @@ namespace TurnBased.States {
             SetCurrentEntity();
         }
 
-        public override void Act(string action) {
-            Console.WriteLine("Acting");
-            if (action == "changeCharacter") {
+        public override void Act(EntityAction action) {
+            if (action.Name == "changeCharacter") {
                 PutNextCharacterFirstInQueue();                
             }
 			else {
-				Entity current = entityTurnOrder.Peek();
+				Entity currentEntity = entityTurnOrder.Peek();
+                action.React(currentEntity);
+
+                /*
 				if (action.StartsWith("move"))
 					current.Move(GetCharacterMove(action));
 				if (action == "weapon")
 					current.SetWeapon(1);
-				if (action == "shoot")
+				if (action.StartsWith("shoot"))
 					current.Shoot("x,y");
 				if (action == "skip" || current.IsEnergyDepleted()) {
 					entityTurnOrder.Dequeue();
 				}
+                 * */
+                if (currentEntity.IsEnergyDepleted())
+                    entityTurnOrder.Dequeue();
 				if (entityTurnOrder.Count == 0) {
 					// We are done with this turn
 					// Set next state to computer state

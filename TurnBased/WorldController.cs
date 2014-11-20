@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using TurnBased.Actions;
 using TurnBased.States;
 
 namespace TurnBased {
@@ -43,14 +44,25 @@ namespace TurnBased {
                     stateManager.Push("pause");
                 else if (action == "menu")
                     stateManager.Push("menu");
+                else if (model.IsEnemyTargeted(action)) {
+                    stateManager.Act(CreateShootAction(action));
+                }
                 else if(model.Valid(action)) {
-                    stateManager.Act(action);
+                    stateManager.Act(CreateMoveAction(action));
                 }
             }
         }
 
+        private EntityAction CreateMoveAction(string action) {
+            return new MoveAction() { Position = model.GetPosition(action) };
+        }
+
+        private EntityAction CreateShootAction(string action) {
+            return new ShootAction() { TargetEntity = model.GetEntityAt(action) };
+        }
+        
         private string[,] GetBackground() {
-            return new string[,] {
+            return new [,] {
                 { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
                 { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
                 { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 

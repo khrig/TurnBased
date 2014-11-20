@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TurnBased.Actions;
 using TurnBased.States;
 
 namespace TurnBased {
@@ -9,7 +10,7 @@ namespace TurnBased {
         private readonly Stack<State> states = new Stack<State>();
         private readonly Dictionary<string, State> availableStates = new Dictionary<string, State>();
 
-        public void Act(string action) {
+        public void Act(EntityAction action) {
             states.Peek().Act(action);
         }
 

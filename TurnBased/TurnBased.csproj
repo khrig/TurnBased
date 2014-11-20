@@ -35,6 +35,9 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Actions\Action.cs" />
+    <Compile Include="Actions\MoveAction.cs" />
+    <Compile Include="Actions\ShootAction.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Grid.cs" />

@@ -35,10 +35,9 @@ namespace TurnBased {
             selectedWeapon = 1;
         }
 
-        public void Shoot(string p) {
+        public void Shoot(Entity targetEntity) {
             Console.WriteLine(Name + " shooting");
             energy -= 100; // energy -= Equipment.SelectedWeaponEnergyCost()
-
             // eventQueue.Push("shoot", "targetCoords x,y");
         }
 

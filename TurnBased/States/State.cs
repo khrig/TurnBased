@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using TurnBased.Actions;
 
 namespace TurnBased.States {
     public abstract class State {
@@ -14,7 +12,7 @@ namespace TurnBased.States {
 		}
 	
         public abstract void Init();
-        public abstract void Act(string action);
+        public abstract void Act(EntityAction action);
         public abstract void Update(float deltaTime);
     }
 }

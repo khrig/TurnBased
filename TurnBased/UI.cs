@@ -42,7 +42,7 @@ namespace TurnBased {
             if (lastMouseState.LeftButton == ButtonState.Pressed && currentMouseState.LeftButton == ButtonState.Released) {
                 if (ClickIsOnGrid(currentMouseState)) {
                     Vector2 gridCoordinates = ConvertToGridCoordinates(currentMouseState.X, currentMouseState.Y);
-                    worldController.AddAction("move;" + gridCoordinates.X + "," + gridCoordinates.Y);
+                    worldController.AddAction("click;" + gridCoordinates.X + "," + gridCoordinates.Y);
                 }
                 else if (ClickIsOnUI(currentMouseState)) {
                     
