@@ -64,24 +64,13 @@ namespace TurnBased {
         }
         
         private string[,] GetBackground() {
-            return new [,] {
-                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
-                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
-                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
-                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
-                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
-                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
-                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" }, 
-                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" },
-                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" },
-                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" },
-                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" },
-                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" },
-                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" },
-                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" },
-                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" },
-                { "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg", "bkg" },
-            };
+            int height = 16, width = 20;
+		string[,] grid = new string[height,width];
+		for(int i = 0; i < height; i++) {
+			for(int j = 0; j < width; j++) {
+				grid[i,j] = "bkg";
+			}
+		}
         }
     }
 }
